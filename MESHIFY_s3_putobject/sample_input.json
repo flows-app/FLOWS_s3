@@ -1,0 +1,10 @@
+{
+  "bucketName":"bucket1",
+  "objectName":"hello/world.txt",
+  "contentText":"",
+  "contentBase64":"",
+  "account":{
+    "accessKey":"abc123",
+    "secretKey":"abc123"
+  }
+}

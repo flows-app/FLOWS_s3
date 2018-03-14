@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "meshify util"
+Resources:
+  MESHIFYs3putobjectFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code: MESHIFY_s3_putobject
+      Handler: main.handler
+      Role:
+        Fn::GetAtt: [ LambdaRole , Arn ]
+      Runtime: python3.6
+      Timeout: 300
+  MESHIFYs3putobjectConfig:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: "/MESHIFY/MESHIFY/s3/putobject/lambda"
+      Description: meshify s3 task arn
+      Type: String
+      Value:
+        Fn::GetAtt: [ MESHIFYs3putobjectFunction , Arn ]
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: LambdaRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+              Resource: arn:aws:logs:*:*:*
