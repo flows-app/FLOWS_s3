@@ -5,6 +5,8 @@ import base64
 def handler(event, context):
     bucketName = event['bucketName'];
     objectName = event['objectName'];
+    print('writing object '+objectName+' to '+bucketName)
+    
     if 'contentText' in event:
         content = event['contentText'].encode("utf-8")
     else:
