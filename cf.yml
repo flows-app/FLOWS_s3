@@ -10,6 +10,15 @@ Resources:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
+  MESHIFYs3putobjectLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Fn::Join:
+          - ""
+          - - "/aws/lambda/"
+            - Ref: MESHIFYs3putobjectFunction
+      RetentionInDays: 7
   LambdaRole:
     Type: AWS::IAM::Role
     Properties:
