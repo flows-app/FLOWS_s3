@@ -3,6 +3,12 @@ import json
 import base64
 
 def handler(event, context):
+    #remove credentials from event
+    accessKey = event['account']['accessKey']
+    secretKey = event['account']['secretKey']
+    event['account']['accessKey'] = '***'
+    event['account']['secretKey'] = '***'
+    
     print("event")
     print(event)
 
@@ -15,8 +21,7 @@ def handler(event, context):
     else:
         content = base64.b64decode(event['contentBase64'])
 
-    accessKey = event['account']['accessKey']
-    secretKey = event['account']['secretKey']
+
     S3 = boto3.client('s3',
         aws_access_key_id=accessKey,
         aws_secret_access_key=secretKey
