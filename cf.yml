@@ -1,23 +1,23 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: "meshify s3"
+Description: "flows s3"
 Resources:
-  MESHIFYs3putobjectFunction:
+  putobjectFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_s3_putobject
+      Code: putobject
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYs3putobjectLogGroup:
+  putobjectLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYs3putobjectFunction
+            - Ref: putobjectFunction
       RetentionInDays: 7
   LambdaRole:
     Type: AWS::IAM::Role
@@ -66,13 +66,13 @@ Resources:
               Action:
               - lambda:InvokeFunction
               Resource:
-              - Fn::GetAtt: [ MESHIFYs3putobjectFunction , Arn ]
+              - Fn::GetAtt: [ putobjectFunction , Arn ]
 Outputs:
-  MESHIFYs3putobjectFunction:
-    Description: '/MESHIFY/MESHIFY/s3/putobject/lambda'
+  putobjectFunction:
+    Description: 'putobject'
     Value:
-      Fn::GetAtt: [ MESHIFYs3putobjectFunction , Arn ]
-  MESHIFYs3putobjectRole:
-    Description: '/MESHIFY/MESHIFY/s3/putobject/role'
+      Fn::GetAtt: [ putobjectFunction , Arn ]
+  putobjectRole:
+    Description: 'putobject'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]
