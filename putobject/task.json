@@ -3,23 +3,6 @@
     "lambda": "lambda-arn",
     "role": "iam-arn",
     "input": {
-        "schema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "description": "s3 put object structure",
-            "type": "object",
-            "properties": {
-                "account": {
-                    "type": "string"
-                },
-                "bucketName": {
-                    "type": "string"
-                },
-                "objectName": {
-                      "type": "string"
-                  }
-            },
-            "required": ["account"]
-        },
         "examples": {
             "sampleobject": {
               "bucketName":"bucket1",
@@ -35,11 +18,6 @@
         }
     },
     "output": {
-        "schema": {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "description": "to be defined",
-            "type": "object"
-        },
         "examples": {
             "result": {
                 "name": "value"
