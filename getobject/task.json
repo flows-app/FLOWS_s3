@@ -1,0 +1,30 @@
+{
+    "id": "FLOWS/s3/getobject",
+    "lambda": "lambda-arn",
+    "role": "iam-arn",
+    "input": {
+        "examples": {
+            "sampleobject": {
+              "bucketName":"bucket1",
+              "objectName":"hello/world.txt",
+              "account":{
+                "accessKey":"abc123",
+                "secretKey":"abc123"
+              }
+            }
+
+        }
+    },
+    "output": {
+        "examples": {
+            "result": {
+              "contentText":"hallo welt",
+              "contentBase64":"aGFsbG8gd2VsdA=="
+            }
+        }
+    },
+    "type": "task",
+    "description": "gets an object from a s3 bucket",
+    "icon": "https://flows.app/favicon.png",
+    "billing": "standard"
+}
